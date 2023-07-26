@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String KEY_CLICK_COUNT = "click_count";
+
     private int clickCount = 0;
     private TextView textViewCounter;
 
@@ -27,5 +29,14 @@ public class MainActivity extends AppCompatActivity {
                 textViewCounter.setText(String.valueOf(clickCount));
             }
         });
+        if (savedInstanceState != null) {
+            clickCount = savedInstanceState.getInt(KEY_CLICK_COUNT, 0);
+            textViewCounter.setText(String.valueOf(clickCount));
+        }
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_CLICK_COUNT, clickCount);
     }
 }
