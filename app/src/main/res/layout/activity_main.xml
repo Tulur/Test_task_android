@@ -3,6 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonClick"
+        android:layout_alignParentTop="true" />
+
     <TextView
         android:id="@+id/textViewCounter"
         android:layout_width="wrap_content"
@@ -16,8 +23,7 @@
         android:id="@+id/buttonClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewCounter"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
         android:text="Click Me" />
 </RelativeLayout>
