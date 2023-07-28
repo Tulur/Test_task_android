@@ -1,6 +1,9 @@
 package com.example.test_task_android;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,5 +42,23 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnUse
                 .replace(R.id.fragment_container, userDetailFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.menu_add_user) {
+            UserAddFragment userAddFragment = new UserAddFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, userAddFragment)
+                    .addToBackStack(null)
+                    .commit();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
