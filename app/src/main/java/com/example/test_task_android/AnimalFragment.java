@@ -7,15 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +42,9 @@ public class AnimalFragment extends Fragment {
 
         return rootView;
     }
-
+    public void onResponse(JSONArray jsonArray) {
+        Log.d("API_Response", jsonArray.toString());
+    }
     private void fetchAnimals() {
         Context context = getContext();
         if (context == null) {
@@ -54,7 +55,7 @@ public class AnimalFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("https://zoo-animal-api.herokuapp.com/animals/rand/10");
+                    URL url = new URL("https://shibe.online/api/shibes?count=10&urls=true&httpsUrls=true");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(5000);
@@ -72,6 +73,13 @@ public class AnimalFragment extends Fragment {
                         bufferedReader.close();
 
                         JSONArray jsonArray = new JSONArray(response.toString());
+
+                        animalList.clear();
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            String imageUrl = jsonArray.getString(i);
+                            animalList.add(new Animal("Animal " + (i + 1), "Species " + (i + 1), i + 1, imageUrl));
+                        }
 
                         getActivity().runOnUiThread(new Runnable() {
                             @Override

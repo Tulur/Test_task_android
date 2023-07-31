@@ -4,11 +4,15 @@ public class Animal {
     private String name;
     private String species;
     private int age;
+    private String imageUrl;
 
-    public Animal(String name, String species, int age) {
+
+
+    public Animal(String name, String species, int age, String imageUrl) {
         this.name = name;
         this.species = species;
         this.age = age;
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {
@@ -19,5 +23,8 @@ public class Animal {
     }
     public int getAge() {
         return age;
+    }
+    public String getImageUrl() {
+        return imageUrl;
     }
 }
